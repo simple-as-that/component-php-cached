@@ -37,8 +37,6 @@ class AbstractStorage {
     
     protected $cachetime = 3600;
     
-    protected $prefix;
-    
     /**
      * 
      * @param array $options The options to configure the used storage
@@ -82,25 +80,6 @@ class AbstractStorage {
         $this->cachetime = $cachetime;
         return $this;
     }
-    
-    /**
-     * returns the defined cache prefix
-     * @return string
-     */
-    public function getPrefix() {
-        return $this->prefix;
-    }
-
-    /**
-     * set the cache item prefix
-     * @param string $prefix
-     * @return \SAT\Component\Cached\Storage\AbstractStorage
-     */
-    public function setPrefix($prefix) {
-        $this->prefix = $prefix;
-        return $this;
-    }
-
     
 
     /**

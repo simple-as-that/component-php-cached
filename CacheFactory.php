@@ -17,6 +17,12 @@ class CacheFactory implements StorageInterface{
      */
     private $cacheStorage;
     
+    /**
+     *
+     * @var string
+     */
+    private $prefix;
+    
     
     public function __construct( StorageInterface $storage ) {
         $this->cacheStorage = $storage;
@@ -25,18 +31,55 @@ class CacheFactory implements StorageInterface{
     public function init() {}
     
     public function set($id, $content, $timestamp = false) {
-        return $this->cacheStorage->set($id, $content, $timestamp);
+        return $this->cacheStorage->set($this->getId($id), $content, $timestamp);
     }
     
     public function get($id) {
-        return $this->cacheStorage->get($id);
+        return $this->cacheStorage->get($this->getId($id));
     }
 
     public function delete($id) {
-        return $this->cacheStorage->delete($id);
+        return $this->cacheStorage->delete($this->getId($id));
     }
 
     public function flush() {
-        $this->cacheStorage->flush();
+        #$this->cacheStorage->flush();
     }
+    
+    /**
+     * 
+     * @param StorageInterface $storage
+     * @return \SAT\Component\Cached\CacheFactory
+     */
+    public function setCacheStorage( StorageInterface $storage ){
+        $this->cacheStorage = $storage;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return StorageInterface
+     */
+    public function getCacheStorage(){
+        return $this->cacheStorage;
+    }
+    
+    public function getPrefix() {
+        return $this->prefix;
+    }
+
+    public function setPrefix($prefix) {
+        $this->prefix = $prefix;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @param type $id
+     */
+    private function getId($id){
+        return $this->prefix."_".$id;
+    }
+
+
 }
