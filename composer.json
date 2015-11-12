@@ -1,0 +1,21 @@
+{
+    "name": "sat/component/cached",
+    "description": "Description of project Cached.",
+    "authors": [
+        {
+            "name": "Markus Sommerfeld",
+            "email": "markus@simpleasthat.de"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "~5.3"
+    },
+
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "SAT\\Component\\Cached\\": ""
+        }
+    }
+}
